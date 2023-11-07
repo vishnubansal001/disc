@@ -18,7 +18,7 @@ export async function DELETE(
       where: {
         id: params.serverId,
         profileId: profile.id,
-      },
+      }
     });
 
     return NextResponse.json(server);
@@ -48,7 +48,7 @@ export async function PATCH(
       data: {
         name,
         imageUrl,
-      },
+      }
     });
 
     return NextResponse.json(server);

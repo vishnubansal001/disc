@@ -40,9 +40,7 @@ export const InviteModal = () => {
   const onNew = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.patch(
-        `/api/servers/${server?.id}/invite-code`
-      );
+      const response = await axios.patch(`/api/servers/${server?.id}/invite-code`);
 
       onOpen("invite", { server: response.data });
     } catch (error) {
@@ -50,7 +48,7 @@ export const InviteModal = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -61,7 +59,9 @@ export const InviteModal = () => {
           </DialogTitle>
         </DialogHeader>
         <div className="p-6">
-          <Label className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
+          <Label
+            className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
+          >
             Server invite link
           </Label>
           <div className="flex items-center mt-2 gap-x-2">
@@ -71,11 +71,10 @@ export const InviteModal = () => {
               value={inviteUrl}
             />
             <Button disabled={isLoading} onClick={onCopy} size="icon">
-              {copied ? (
-                <Check className="w-4 h-4" />
-              ) : (
-                <Copy className="w-4 h-4" />
-              )}
+              {copied 
+                ? <Check className="w-4 h-4" /> 
+                : <Copy className="w-4 h-4" />
+              }
             </Button>
           </div>
           <Button
@@ -91,5 +90,5 @@ export const InviteModal = () => {
         </div>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}

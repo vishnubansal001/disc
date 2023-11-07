@@ -7,7 +7,7 @@ import { db } from "@/lib/db";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponseServerIo
+  res: NextApiResponseServerIo,
 ) {
   if (req.method !== "DELETE" && req.method !== "PATCH") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -36,13 +36,13 @@ export default async function handler(
         members: {
           some: {
             profileId: profile.id,
-          },
-        },
+          }
+        }
       },
       include: {
         members: true,
-      },
-    });
+      }
+    })
 
     if (!server) {
       return res.status(404).json({ error: "Server not found" });
@@ -54,14 +54,12 @@ export default async function handler(
         serverId: serverId as string,
       },
     });
-
+  
     if (!channel) {
       return res.status(404).json({ error: "Channel not found" });
     }
 
-    const member = server.members.find(
-      (member) => member.profileId === profile.id
-    );
+    const member = server.members.find((member) => member.profileId === profile.id);
 
     if (!member) {
       return res.status(404).json({ error: "Member not found" });
@@ -76,10 +74,10 @@ export default async function handler(
         member: {
           include: {
             profile: true,
-          },
-        },
-      },
-    });
+          }
+        }
+      }
+    })
 
     if (!message || message.deleted) {
       return res.status(404).json({ error: "Message not found" });
@@ -108,10 +106,10 @@ export default async function handler(
           member: {
             include: {
               profile: true,
-            },
-          },
-        },
-      });
+            }
+          }
+        }
+      })
     }
 
     if (req.method === "PATCH") {
@@ -130,10 +128,10 @@ export default async function handler(
           member: {
             include: {
               profile: true,
-            },
-          },
-        },
-      });
+            }
+          }
+        }
+      })
     }
 
     const updateKey = `chat:${channelId}:messages:update`;
