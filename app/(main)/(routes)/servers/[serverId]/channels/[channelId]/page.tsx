@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 import { ChannelType } from "@prisma/client";
 
 import { currentProfile } from "@/lib/current-profile";
-// import { ChatHeader } from "@/components/chat/chat-header";
-// import { ChatInput } from "@/components/chat/chat-input";
+import { ChatHeader } from "@/components/chat/chat-header";
+import { ChatInput } from "@/components/chat/chat-input";
 // import { ChatMessages } from "@/components/chat/chat-messages";
 // import { MediaRoom } from "@/components/media-room";
 import { db } from "@/lib/db";
@@ -44,11 +44,11 @@ const ChannelIdPage = async ({
 
   return ( 
     <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
-      {/* <ChatHeader
+      <ChatHeader
         name={channel.name}
         serverId={channel.serverId}
         type="channel"
-      /> */}
+      />
       {channel.type === ChannelType.TEXT && (
         <>
           {/* <ChatMessages
@@ -65,7 +65,7 @@ const ChannelIdPage = async ({
             paramKey="channelId"
             paramValue={channel.id}
           /> */}
-          {/* <ChatInput
+          <ChatInput
             name={channel.name}
             type="channel"
             apiUrl="/api/socket/messages"
@@ -73,7 +73,7 @@ const ChannelIdPage = async ({
               channelId: channel.id,
               serverId: channel.serverId,
             }}
-          /> */}
+          />
         </>
       )}
       {channel.type === ChannelType.AUDIO && (
